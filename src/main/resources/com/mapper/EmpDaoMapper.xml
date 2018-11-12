@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace 与接口的全类名对应 包名+类名 -->
+<mapper namespace="com.dao.EmpDao">
+	 <!-- 
+	 	select 标签做查询操作
+	 		id:对应接口中的方法名称
+			parameterType:指定参数类型
+			resultType:指定结果类型,就是返回值类型
+			#{id},标识占位符,相当于?
+	  -->
+	  
+	  <select id="queryAll" resultType="com.entity.Employees">
+	  	SELECT id,name,salary,age,bir,sex
+		FROM q_employees
+	  </select>
+	  <select id="queryByTeId" parameterType="int" resultType="com.entity.Employees">
+	  	SELECT id,name,salary,age,bir,sex
+		FROM q_employees
+		where id = #{id}
+	  </select>
+     
+     <delete id="deleteById" parameterType="int">
+     	DELETE
+     	FROM q_employees
+     	WHERE id = #{id}
+     </delete>
+     
+     <update id="update" parameterType="com.entity.Employees">
+     	UPDATE q_employees
+     	SET name = #{name},salary = #{salary},age = #{age},bir=#{bir},sex=#{sex}
+      	WHERE id = #{id}
+     </update>
+     
+     <insert id="insert" parameterType="com.entity.Employees">
+     	
+     	INSERT into q_employees
+     	VALUES(#{id},#{name},#{salary},#{age},#{bir},#{sex})
+     </insert>
+    
+</mapper>
